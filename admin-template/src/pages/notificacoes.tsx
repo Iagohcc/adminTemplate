@@ -1,10 +1,12 @@
 import Layout from "@/components/template/Layout";
+import useAppData from "@/data/hook/UseAppData";
 
 export default function Notificacoes() {
+
+  const dados = useAppData()
   return (
-    <div>
-      <Layout titulo="Notificações" subtitulo="Construindo uma page">
-      </Layout>
-    </div>
+    <Layout titulo="Notificações" subtitulo="Construindo uma page">
+      <h3>{dados.nome}</h3>
+    </Layout>
   )
 }
