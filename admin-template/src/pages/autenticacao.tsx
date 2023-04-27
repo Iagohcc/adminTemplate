@@ -1,7 +1,13 @@
+import { IconAviso } from "@/components/Icons";
 import AuthInput from "@/components/auth/AuthInput";
+import useAuthData from "@/data/hook/UseAuthData";
 import { useState } from "react";
 
 export default function Autenticacao() {
+
+    const { usuario, loginGoogle } = useAuthData()
+
+    const [erro, setErro] = useState(null)
     const [modo, setModo] = useState<'login' | 'cadastro'>('login')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -9,9 +15,16 @@ export default function Autenticacao() {
     function submeter() {
         if (modo === 'login') {
             console.log('login')
+            exibirErro('Ocorreu um erro no login!')
         } else {
             console.log('cadastrar')
+            exibirErro('Ocorreu um erro no cadastro!')
         }
+    }
+
+    function exibirErro(msg: any, tempoEmSegundos = 5) {
+        setErro(msg)
+        setTimeout(() => setErro(null), tempoEmSegundos * 1000)
     }
 
     return (
@@ -24,6 +37,15 @@ export default function Autenticacao() {
                 <h1 className="text-3xl font-bold mb-5">
                     {modo === 'login' ? 'Entre com Sua Conta' : 'Cadastra-se na Plataforma.'}
                 </h1>
+
+                {erro ? (
+                    <div className=" flex items-center bg-red-600 text-white py-3 px-5 my-2 border border-red-800 rounded-lg">
+                        {IconAviso()}
+                        <span className="ml-6">{erro}</span>
+                    </div>
+                ) : false}
+
+
                 <AuthInput
                     label="Email"
                     tipo="email"
@@ -41,7 +63,7 @@ export default function Autenticacao() {
 
                 <hr className="my-6 w-full border-gray-300" />
 
-                <button onClick={submeter} className={`text-white bg-red-600 hover:bg-red-500 rounded-lg w-full px-4 py-3 `}>
+                <button onClick={loginGoogle} className={`text-white bg-red-600 hover:bg-red-500 rounded-lg w-full px-4 py-3 `}>
                     Entrar com Google
                 </button>
 

@@ -10,15 +10,15 @@ export default function MenuLateral() {
                 <Logo />
             </div>
             <ul className="flex-grow">
-                <MenuItem url="/" texto="Início" icone={IconHome} />
-                <MenuItem url="/ajustes" texto="Ajustes" icone={IconAjuste} />
-                <MenuItem url="/notificacoes" texto="Notificações" icone={IconNotificacoes} />
+                <MenuItem url="/" texto="Início" icone={IconHome()} />
+                <MenuItem url="/ajustes" texto="Ajustes" icone={IconAjuste()} />
+                <MenuItem url="/notificacoes" texto="Notificações" icone={IconNotificacoes()} />
             </ul>
             <ul >
                 <MenuItem
                     onClick={() => console.log('logout')}
                     texto="Sair"
-                    icone={IconSair}
+                    icone={IconSair()}
                     className={`text-red-600 hover:bg-red-400 hover:text-white`} />
             </ul>
         </aside>
