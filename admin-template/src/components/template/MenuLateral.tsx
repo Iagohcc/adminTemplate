@@ -1,9 +1,13 @@
 
+import useAuthData from "@/data/hook/UseAuthData";
 import { IconHome, IconAjuste, IconNotificacoes, IconSair } from "../Icons";
 import Logo from "./Logo";
 import MenuItem from "./MenuItem";
 
 export default function MenuLateral() {
+
+    const { logout } = useAuthData()
+
     return (
         <aside className="flex flex-col">
             <div className="flex flex-col items-center justify-center bg-gradient-to-r from-indigo-500 to-purple-800 h-20 w-20">
@@ -16,7 +20,7 @@ export default function MenuLateral() {
             </ul>
             <ul >
                 <MenuItem
-                    onClick={() => console.log('logout')}
+                    onClick={logout}
                     texto="Sair"
                     icone={IconSair()}
                     className={`text-red-600 hover:bg-red-400 hover:text-white`} />
