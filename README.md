@@ -2,7 +2,7 @@
 
 Projeto construido em Next.js e Tailwind com layout responsivo, utilizando flexbox e métodos do FireBase para autenticação de usuário. 
 
-![ProjetoAdminTemplate](https://user-images.githubusercontent.com/46465161/235055103-73b03b1a-4c4b-4fd9-8ec2-95caf92c3d9f.gif)
+![ProjetoAdminTemplate](https://user-images.githubusercontent.com/46465161/235268609-15fa8bae-d156-4531-b1db-5c759d695a76.gif)
 
 # INSTRUÇÕES PARA USO
 
