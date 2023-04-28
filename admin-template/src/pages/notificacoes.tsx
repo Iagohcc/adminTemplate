@@ -1,10 +1,15 @@
 import Layout from "@/components/template/Layout";
+import Head from "next/head";
 
 export default function Notificacoes() {
 
   return (
-    <Layout titulo="Notificações" subtitulo="Construindo uma page">
-      <h3>Página em construção</h3>
-    </Layout>
+    <>
+      <Head>
+        <title>Notificações</title>
+      </Head>
+      <Layout titulo="Notificações" subtitulo="Página em Construção">
+      </Layout>
+    </>
   )
 }

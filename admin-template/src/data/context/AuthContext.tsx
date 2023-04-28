@@ -5,7 +5,10 @@ import route from 'next/router';
 import Cookies from 'js-cookie';
 
 interface AuthContextProps {
-    usuario: Usuario
+    usuario?: Usuario
+    carregando?: boolean
+    cadastrar?: (email: string, senha: string) => Promise<void>
+    login?: (email: string, senha: string) => Promise<void>
     loginGoogle?: () => Promise<void>
     logout?: () => Promise<void>
 }
@@ -38,7 +41,7 @@ export function AuthProvider(props: any) {
     const [carregando, setCarregando] = useState(false)
     const [usuario, setUsuario] = useState<Usuario>(null)
 
-    async function configurarSessao(usuarioFirebase) {
+    async function configurarSessao(usuarioFirebase: any) {
         if (usuarioFirebase?.email) {
             const usuario = await usuarioNormalizado(usuarioFirebase)
             setUsuario(usuario)
@@ -53,6 +56,29 @@ export function AuthProvider(props: any) {
         }
     }
 
+    async function login(emial: string, senha: string) {
+        try {
+            setCarregando(true)
+            const resp = await firebase.auth().signInWithEmailAndPassword(emial, senha)
+
+            await configurarSessao(resp.user)
+            route.push('/home');
+        } finally {
+            setCarregando(false)
+        }
+    }
+
+    async function cadastrar(emial: string, senha: string) {
+        try {
+            setCarregando(true)
+            const resp = await firebase.auth().createUserWithEmailAndPassword(emial, senha)
+            await configurarSessao(resp.user)
+            route.push('/home');
+        } finally {
+            setCarregando(false)
+        }
+    }
+
     async function loginGoogle() {
 
         try {
@@ -60,9 +86,8 @@ export function AuthProvider(props: any) {
             const resp = await firebase.auth().signInWithPopup(
                 new firebase.auth.GoogleAuthProvider()
             )
-
-            configurarSessao(resp.user)
-            route.push('/');
+            await configurarSessao(resp.user)
+            route.push('/home');
         } finally {
             setCarregando(false)
         }
@@ -73,19 +98,27 @@ export function AuthProvider(props: any) {
             setCarregando(true)
             await firebase.auth().signOut()
             await configurarSessao(null)
+            route.push('/autenticacao');
         } finally {
             setCarregando(false)
         }
     }
 
     useEffect(() => {
-        const cancelar = firebase.auth().onIdTokenChanged(configurarSessao)
-        return () => cancelar()
+        if (Cookies.get('admin-template-ihcc')) {
+            const cancelar = firebase.auth().onIdTokenChanged(configurarSessao)
+            return () => cancelar()
+        } else {
+            setCarregando(false)
+        }
     }, [])
 
     return (
         <AuthContext.Provider value={{
             usuario,
+            carregando,
+            login,
+            cadastrar,
             loginGoogle,
             logout
         }}>
