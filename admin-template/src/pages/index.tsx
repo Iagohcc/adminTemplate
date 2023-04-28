@@ -1,5 +1,3 @@
-import Layout from "@/components/template/Layout";
-import Head from "next/head";
 import router from "next/router";
 import { useEffect } from "react";
 

@@ -14,7 +14,7 @@ export default function Layout(props: LayoutProps) {
         <ForcarAutenticacao>
             <div className={`flex h-screen w-screen`}>
                 <MenuLateral />
-                <div className="flex flex-col p-7 bg-gray-300 w-full">
+                <div className="flex flex-col p-7 bg-gray-300 w-full lg:overflow-scroll">
                     <Cabecalho titulo={props.titulo} subtitulo={props.subtitulo} />
                     <Conteudo>
                         {props.children}
