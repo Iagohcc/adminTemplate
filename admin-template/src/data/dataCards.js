@@ -46,6 +46,18 @@ const dataCards = [
      name: "Izaaque Liborio",
      perfil: "IzaqueL95",
      avatar: "https://avatars.githubusercontent.com/u/79032014?v=4"
+    },
+    {
+     id: 9,
+     name: "Izaaque Liborio",
+     perfil: "IzaqueL95",
+     avatar: "https://avatars.githubusercontent.com/u/79032014?v=4"
+    },
+    {
+     id: 10,
+     name: "Izaaque Liborio",
+     perfil: "IzaqueL95",
+     avatar: "https://avatars.githubusercontent.com/u/79032014?v=4"
     }
   ];
   

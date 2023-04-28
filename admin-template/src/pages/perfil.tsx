@@ -10,15 +10,19 @@ export default function Perfil() {
       <Head>
         <title>Perfil do Usuário</title>
       </Head>
-      <Layout titulo="Perfil do Usuário" subtitulo="">
-        {data.map((item) => (
-          <Card
-            key={item.id}
-            nome={item.name}
-            perfil={item.perfil}
-            avatar={item.avatar}
-          />
-        ))}
+      <Layout titulo="Perfis de Usuários" subtitulo="">
+
+        <div className="flex flex-wrap w-100 justify-center">
+          {data.map((item) => (
+            <Card
+              key={item.id}
+              nome={item.name}
+              perfil={item.perfil}
+              avatar={item.avatar}
+            />
+          ))}
+        </div>
+
       </Layout>
     </>
   )
